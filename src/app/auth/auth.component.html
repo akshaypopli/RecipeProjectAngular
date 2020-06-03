@@ -1,0 +1,21 @@
+<div class="row" style="margin: 10px;">
+    <div class="col-xs 12">
+        <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" class="form-control" ngModel name="email" required email>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" class="form-control" ngModel name="password" required minlength="8">
+            </div>
+            <div style="margin-right: 10px;">
+                <button class="btn btn-primary" style="margin-right: 10px;" type="submit" [disabled]="!f.valid">{{ isLoginMode ? 'Sign In': 'Sign Up' }}</button>
+                <button class="btn btn-primary" style="margin-right: 10px;" type="button" (click)="onSwitchMode()">Switch to {{ isLoginMode ? 'Sign Up': 'Sign In' }}</button>
+            </div>
+            <div class="alert alert-danger" *ngIf="error" style="margin-top: 30px;">
+                <p>{{ error }}</p>
+            </div>
+        </form>
+    </div>
+</div>

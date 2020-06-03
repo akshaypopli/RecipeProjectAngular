@@ -8,44 +8,16 @@ import { Subject, Subscription } from 'rxjs';
 
 export class RecipeService{
 
-    private recipes: Recipe[]= [
-        new Recipe(
-                    'Burger', 
-                    'Tasty Spicy Burger', 
-                    'https://www.seriouseats.com/recipes/images/2015/07/20150702-sous-vide-hamburger-anova-primary.jpg',
-                    [
-                        new Ingredients('Ham', 1),
-                        new Ingredients('Onion', 1),
-                        new Ingredients('Lettuce', 3),
-                        new Ingredients('Hot Sauce', 1),
-                    ]),
-        new Recipe(
-                    'Ramen', 
-                   'Hot Garlic Ramen - super spicy', 
-                   'https://assets.bonappetit.com/photos/5e3c7a3c866b940008106763/16:9/w_1280,c_limit/HLY-Veggie-Ramen-16x9.jpg',
-                   [
-                        new Ingredients('Ramen', 1),
-                        new Ingredients('Vegetables Shredded', 1),
-                        new Ingredients('Eggs', 1),
-                        new Ingredients('Chilli Flakes', 1),
-                        new Ingredients('Spring onion', 1),
-                    ]),
-        new Recipe(
-                    'Spaghetti', 
-                    'Tasty Spaghetti', 
-                    'https://www.starfrit.com/media/contentmanager/content/cache/1070x1070//recipes/e1_r1_spaghetti.jpg',
-                    [
-                        new Ingredients('Spaghetti', 1),
-                        new Ingredients('Tomatoes', 1),
-                        new Ingredients('Chilli Flakes', 1),
-                        new Ingredients('Cheese', 1),
-                    ])
-                   
-    ];
+    private recipes: Recipe[]=[];
 
     constructor(private shoppinglistService: ShoppingListService){}
     recipeChanged = new Subject<Recipe[]>();
     selectedRecipe = new Subject<Recipe>();
+
+    setRecipes(recipes: Recipe[]){
+        this.recipes = recipes;
+        this.recipeChanged.next(this.recipes.slice());
+    }
 
     getRecipes() {
         return this.recipes.slice();
